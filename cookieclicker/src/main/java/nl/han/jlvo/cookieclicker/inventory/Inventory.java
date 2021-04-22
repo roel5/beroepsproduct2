@@ -29,7 +29,8 @@ public class Inventory {
 
     public void increaseCookieWallet() {
         float currentAmount = getCookieWallet();
-        currentAmount++;
+        MouseClicker mouseClicker = (MouseClicker) helpers[0];
+        currentAmount += 1 + mouseClicker.getAmount();
         setCookieWallet(currentAmount);
     }
 }

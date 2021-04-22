@@ -21,4 +21,8 @@ public abstract class AutoHelper {
         int multiplier = isUpgraded ? 2 : 1;
         return multiplier * (baseCookiesPerSecond * amount);
     }
+
+    public int getAmount() {
+        return amount;
+    }
 }
