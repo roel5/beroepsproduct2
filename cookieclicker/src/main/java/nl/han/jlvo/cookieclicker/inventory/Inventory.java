@@ -27,6 +27,10 @@ public class Inventory {
         this.cookieWallet = cookieWallet;
     }
 
+    public AutoHelper[] getHelpers() {
+        return helpers;
+    }
+
     public void increaseCookieWallet() {
         float currentAmount = getCookieWallet();
         MouseClicker mouseClicker = (MouseClicker) helpers[0];
