@@ -5,6 +5,7 @@ import nl.han.ica.oopg.view.View;
 import nl.han.jlvo.cookieclicker.screens.PlayScreen;
 
 public class CookieClickerApp extends GameEngine {
+    PlayScreen playScreen;
 
     public static void main(String[] args) {
         CookieClickerApp app = new CookieClickerApp();
@@ -20,8 +21,7 @@ public class CookieClickerApp extends GameEngine {
         setView(view);
         size(worldWidth, worldHeight);
 
-        PlayScreen playScreen = new PlayScreen(this);
-        playScreen.createScoreDashboard(0, 0, worldWidth, worldHeight);
+        playScreen = new PlayScreen(this);
     }
 
     @Override

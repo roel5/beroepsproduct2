@@ -26,4 +26,10 @@ public class Inventory {
     public void setCookieWallet(float cookieWallet) {
         this.cookieWallet = cookieWallet;
     }
+
+    public void increaseCookieWallet() {
+        float currentAmount = getCookieWallet();
+        currentAmount++;
+        setCookieWallet(currentAmount);
+    }
 }
