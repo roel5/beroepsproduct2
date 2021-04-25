@@ -14,6 +14,7 @@ public class AutoHelperUpdateTimer implements IAlarmListener {
     private void startAlarm() {
         Alarm alarm = new Alarm(this.getClass().getName(), 1);
         alarm.addTarget(this);
+        alarm.start();
     }
 
     @Override
