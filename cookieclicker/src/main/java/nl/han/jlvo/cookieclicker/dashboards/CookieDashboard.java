@@ -12,16 +12,19 @@ public class CookieDashboard extends Dashboard {
     public CookieDashboard(Inventory inventory) {
         super(0, 0, 300, 20);
         this.inventory = inventory;
-        cookieDashboardText = new TextObject("Cookiewallet: " + inventory.getCookieWallet() + "Cookies per second: " + inventory.getTotalCookiesPerSecond(), 10);
+        cookieDashboardText = new TextObject("Cookiewallet: " + inventory.getWallet().getCookiesInWallet() + "Cookies per second: " + inventory.getTotalCookiesPerSecond(), 10);
         cookieDashboardText.setForeColor(255, 255, 255, 255);
         setBackground(500, 0, 0);
         addGameObject(cookieDashboardText);
     }
 
-
+    @Override
+    public void mouseClicked(int x, int y, int button) {
+        super.mouseClicked(x, y, button);
+    }
 
     @Override
     public void update() {
-        cookieDashboardText.setText("Cookiewallet: " + inventory.getCookieWallet() + "Cookies per second: " + inventory.getTotalCookiesPerSecond());
+        cookieDashboardText.setText("Cookiewallet: " + inventory.getWallet().getCookiesInWallet() + "Cookies per second: " + inventory.getTotalCookiesPerSecond());
     }
 }

@@ -3,11 +3,12 @@ package nl.han.jlvo.cookieclicker.inventory;
 import nl.han.jlvo.cookieclicker.autohelper.*;
 
 public class Inventory {
-    private float cookieWallet;
+    private final Wallet wallet;
     private final AutoHelper[] helpers;
 
     public Inventory() {
-        cookieWallet = 0;
+        wallet = new Wallet();
+        wallet.increaseCookiesInWallet(10000);
         helpers = new AutoHelper[]{new MouseClicker(), new Grandma(), new CookieFarm(), new CookieMine(), new CookieFactory()};
     }
 
@@ -19,22 +20,32 @@ public class Inventory {
         return totalCookiesPerSecond;
     }
 
-    public float getCookieWallet() {
-        return cookieWallet;
-    }
-
-    public void setCookieWallet(float cookieWallet) {
-        this.cookieWallet = cookieWallet;
-    }
-
     public AutoHelper[] getHelpers() {
         return helpers;
     }
 
+    public AutoHelper getHelper(AutoHelperKind kind) {
+        return helpers[kind.ordinal()];
+    }
+
+    public boolean buyHelper(AutoHelper helper) {
+        boolean isPurchaseSuccessful = false;
+
+        if (helper.getHelperPrice() <= wallet.getCookiesInWallet()) {
+            helper.increaseHelper();
+            wallet.decreaseCookiesInWallet(helper.getHelperPrice());
+            isPurchaseSuccessful = true;
+        }
+        return isPurchaseSuccessful;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
     public void increaseCookieWallet() {
-        float currentAmount = getCookieWallet();
         MouseClicker mouseClicker = (MouseClicker) helpers[0];
-        currentAmount += 1 + mouseClicker.getAmount();
-        setCookieWallet(currentAmount);
+        float amount = 1 + mouseClicker.getAmount();
+        wallet.increaseCookiesInWallet(amount);
     }
 }
