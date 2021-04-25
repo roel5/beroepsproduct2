@@ -7,15 +7,17 @@ import java.util.Random;
 
 public class VerminSpawner implements IAlarmListener {
     private final IVerminSpawnerListener spawnerListener;
+    private final Random random;
 
     public VerminSpawner(IVerminSpawnerListener spawnerListener) {
         this.spawnerListener = spawnerListener;
+        random = new Random();
         startAlarm();
     }
 
     private void startAlarm() {
-        int randomVermin = new Random().nextInt(20);
-        Alarm alarm = new Alarm("New Vermin", randomVermin);
+        int interval = random.nextInt(20);
+        Alarm alarm = new Alarm(this.getClass().getName(), interval);
         alarm.addTarget(this);
         alarm.start();
     }

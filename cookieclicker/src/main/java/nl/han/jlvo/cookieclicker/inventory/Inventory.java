@@ -5,6 +5,8 @@ import nl.han.jlvo.cookieclicker.autohelper.*;
 public class Inventory {
     private final Wallet wallet;
     private final AutoHelper[] helpers;
+    private boolean isHelperPowerUpActive;
+    private boolean isClickPowerUpActive;
 
     public Inventory() {
         wallet = new Wallet();
@@ -16,6 +18,9 @@ public class Inventory {
         float totalCookiesPerSecond = 0;
         for (AutoHelper helper : helpers) {
             totalCookiesPerSecond += helper.calculateCookiesPerSecond();
+        }
+        if (isHelperPowerUpActive) {
+            totalCookiesPerSecond = totalCookiesPerSecond * 2;
         }
         return totalCookiesPerSecond;
     }
@@ -46,10 +51,21 @@ public class Inventory {
     public void increaseCookieWalletByClick() {
         MouseClicker mouseClicker = (MouseClicker) helpers[0];
         float amount = 1 + mouseClicker.getAmount();
+        if (isClickPowerUpActive) {
+            amount = amount * 2;
+        }
         wallet.increaseCookiesInWallet(amount);
     }
 
     public void increaseCookieWalletByAutoHelpers() {
         wallet.increaseCookiesInWallet(getTotalCookiesPerSecond());
+    }
+
+    public void setHelperPowerUpActive(boolean helperPowerUpActive) {
+        isHelperPowerUpActive = helperPowerUpActive;
+    }
+
+    public void setClickPowerUpActive(boolean clickPowerUpActive) {
+        isClickPowerUpActive = clickPowerUpActive;
     }
 }
