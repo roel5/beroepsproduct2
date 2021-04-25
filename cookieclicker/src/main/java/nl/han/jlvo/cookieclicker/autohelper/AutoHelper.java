@@ -8,15 +8,12 @@ public abstract class AutoHelper {
     protected int amount;
     protected boolean isUpgraded;
 
-    public float buyHelper(float cookieWallet) {
-        float price = getHelperPrice();
-        if (cookieWallet < price) return cookieWallet;
+    public void increaseHelper() {
         amount++;
-        return cookieWallet - price;
     }
 
     public float getHelperPrice() {
-        return (float) (basePrice + basePrice * (amount * PRICE_MULTIPLIER));
+        return (float) (basePrice + (basePrice * (amount * PRICE_MULTIPLIER)));
     }
 
     public float calculateCookiesPerSecond() {
@@ -26,5 +23,13 @@ public abstract class AutoHelper {
 
     public int getAmount() {
         return amount;
+    }
+
+    public boolean isUpgraded() {
+        return isUpgraded;
+    }
+
+    public void setUpgraded(boolean upgraded) {
+        isUpgraded = upgraded;
     }
 }

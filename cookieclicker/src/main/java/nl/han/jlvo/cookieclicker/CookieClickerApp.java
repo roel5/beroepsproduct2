@@ -14,8 +14,8 @@ public class CookieClickerApp extends GameEngine {
 
     @Override
     public void setupGame() {
-        int worldWidth = 500;
-        int worldHeight = 500;
+        int worldWidth = 1200;
+        int worldHeight = 800;
 
         View view = new View(worldWidth, worldHeight);
         setView(view);
