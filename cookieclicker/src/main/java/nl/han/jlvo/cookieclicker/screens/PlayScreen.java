@@ -5,15 +5,17 @@ import nl.han.jlvo.cookieclicker.autohelper.AutoHelperUpdateTimer;
 import nl.han.jlvo.cookieclicker.autohelper.IAutoHelperUpdateListener;
 import nl.han.jlvo.cookieclicker.dashboards.CookieDashboard;
 import nl.han.jlvo.cookieclicker.dashboards.HelpersDashboard;
+import nl.han.jlvo.cookieclicker.inventory.Wallet;
 import nl.han.jlvo.cookieclicker.store.StoreDashboard;
 import nl.han.jlvo.cookieclicker.gameobjects.BigCookie;
+import nl.han.jlvo.cookieclicker.vermin.IVerminListener;
 import nl.han.jlvo.cookieclicker.vermin.IVerminSpawnerListener;
 import nl.han.jlvo.cookieclicker.vermin.Vermin;
 import nl.han.jlvo.cookieclicker.gameobjects.IBigCookieClickListener;
 import nl.han.jlvo.cookieclicker.inventory.Inventory;
 import nl.han.jlvo.cookieclicker.vermin.VerminSpawner;
 
-public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateListener, IVerminSpawnerListener {
+public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateListener, IVerminSpawnerListener, IVerminListener {
 
     private final Inventory inventory;
     private final BigCookie bigCookie;
@@ -53,6 +55,16 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
     @Override
     public void onVerminSpawnerTriggered() {
         //TODO Add objects to list
-        app.addGameObject(new Vermin(bigCookie, app.getWidth(), app.getHeight()));
+        app.addGameObject(new Vermin(bigCookie, app.getWidth(), app.getHeight(), this));
+    }
+
+    @Override
+    public void onCookiesEatUpdate(float amount) {
+        inventory.getWallet().decreaseCookiesInWallet(amount);
+    }
+
+    @Override
+    public void onVerminDied(Vermin vermin) {
+        app.deleteGameObject(vermin);
     }
 }
