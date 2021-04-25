@@ -43,9 +43,13 @@ public class Inventory {
         return wallet;
     }
 
-    public void increaseCookieWallet() {
+    public void increaseCookieWalletByClick() {
         MouseClicker mouseClicker = (MouseClicker) helpers[0];
         float amount = 1 + mouseClicker.getAmount();
         wallet.increaseCookiesInWallet(amount);
+    }
+
+    public void increaseCookieWalletByAutoHelpers() {
+        wallet.increaseCookiesInWallet(getTotalCookiesPerSecond());
     }
 }
