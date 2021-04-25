@@ -18,6 +18,7 @@ public class CookieClickerApp extends GameEngine {
         int worldHeight = 800;
 
         View view = new View(worldWidth, worldHeight);
+        view.setBackground(200,200,200);
         setView(view);
         size(worldWidth, worldHeight);
 
@@ -26,6 +27,5 @@ public class CookieClickerApp extends GameEngine {
 
     @Override
     public void update() {
-
     }
 }
