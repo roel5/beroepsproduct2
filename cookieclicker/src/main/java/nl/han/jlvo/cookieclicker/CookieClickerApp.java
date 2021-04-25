@@ -5,7 +5,7 @@ import nl.han.ica.oopg.view.View;
 import nl.han.jlvo.cookieclicker.screens.PlayScreen;
 
 public class CookieClickerApp extends GameEngine {
-    PlayScreen playScreen;
+    private PlayScreen playScreen;
 
     public static void main(String[] args) {
         CookieClickerApp app = new CookieClickerApp();
