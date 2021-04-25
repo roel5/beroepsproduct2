@@ -10,88 +10,103 @@ import java.util.List;
 import java.util.Random;
 
 public class Vermin extends AnimatedSpriteObject implements ICollidableWithGameObjects {
-    private static final int SPEED = 3;
-
     boolean isEating = false;
     final GameObject target;
-    Direction direction;
-    int health;
-    int screenWidth;
-    int screenHeight;
+    private Direction direction;
+    private int health;
+    private final int screenWidth;
+    private final int screenHeight;
+    private final IVerminListener verminListener;
+    private final Random random;
 
-    public Vermin(GameObject target, int screenWidth, int screenHeight) {
+    public Vermin(GameObject target, int screenWidth, int screenHeight, IVerminListener verminListener) {
         super(new Sprite("cookieclicker/src/main/java/nl/han/jlvo/cookieclicker/resources/spritesheet.png"), 8);
         this.target = target;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
-        generateDirection();
+        this.verminListener = verminListener;
+        random = new Random();
+        health = random.nextInt(10);
+        setDirection();
     }
 
-    private void generateDirection() {
-        int xPos = 600;
-        int yPos = 400;
-        int random = new Random().nextInt(8);
-        switch (random) {
-            case 0:
-                direction = Direction.TOP;
-                yPos = 0;
-                xPos = screenWidth / 2;
-                setCurrentFrameIndex(7);
-                break;
+    private void setDirection() {
+        int xPos;
+        int yPos;
+        int spriteFrameIndex;
+        int position = random.nextInt(8);
+        switch (position) {
             case 1:
                 direction = Direction.TOP_RIGHT;
                 yPos = 0;
                 xPos = screenWidth;
-                setCurrentFrameIndex(6);
+                spriteFrameIndex = 7;
                 break;
             case 2:
                 direction = Direction.RIGHT;
                 yPos = screenHeight / 2;
                 xPos = screenWidth;
-                setCurrentFrameIndex(4);
+                spriteFrameIndex = 4;
                 break;
             case 3:
                 direction = Direction.BOTTOM_RIGHT;
                 yPos = screenHeight;
                 xPos = screenWidth;
-                setCurrentFrameIndex(1);
+                spriteFrameIndex = 1;
                 break;
             case 4:
                 direction = Direction.BOTTOM;
                 xPos = screenWidth / 2;
                 yPos = screenHeight;
-                setCurrentFrameIndex(2);
+                spriteFrameIndex = 2;
                 break;
             case 5:
                 direction = Direction.BOTTOM_LEFT;
                 yPos = screenHeight;
                 xPos = 0;
-                setCurrentFrameIndex(0);
+                spriteFrameIndex = 3;
                 break;
             case 6:
                 direction = Direction.LEFT;
                 yPos = screenHeight / 2;
                 xPos = 0;
-                setCurrentFrameIndex(3);
+                spriteFrameIndex = 5;
                 break;
             case 7:
                 direction = Direction.TOP_LEFT;
                 yPos = 0;
                 xPos = 0;
-                setCurrentFrameIndex(5);
+                spriteFrameIndex = 0;
+                break;
+            default:
+                direction = Direction.TOP;
+                yPos = 0;
+                xPos = screenWidth / 2;
+                spriteFrameIndex = 0;
                 break;
         }
         setX(xPos);
         setY(yPos);
-        setSpeed(SPEED);
+        setCurrentFrameIndex(spriteFrameIndex);
+        setSpeed(random.nextInt(5) + 1);
     }
-
 
     @Override
     public void update() {
         setDirection(getAngleFrom(target));
         if (isEating) {
-            //TODO decrease cookies
+            verminListener.onCookiesEatUpdate(random.nextInt(4));
+        }
+    }
+
+    @Override
+    public void mouseClicked(int x, int y, int button) {
+        super.mouseClicked(x, y, button);
+        if (x >= this.x && x <= this.x + this.width && y >= this.y && y <= this.y + this.height) {
+            health--;
+            if (health <= 0) {
+                verminListener.onVerminDied(this);
+            }
         }
     }
 
