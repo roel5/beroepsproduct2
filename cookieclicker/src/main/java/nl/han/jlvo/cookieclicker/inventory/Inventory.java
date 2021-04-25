@@ -32,8 +32,8 @@ public class Inventory {
         boolean isPurchaseSuccessful = false;
 
         if (helper.getHelperPrice() <= wallet.getCookiesInWallet()) {
-            helper.increaseHelper();
             wallet.decreaseCookiesInWallet(helper.getHelperPrice());
+            helper.increaseHelper();
             isPurchaseSuccessful = true;
         }
         return isPurchaseSuccessful;
