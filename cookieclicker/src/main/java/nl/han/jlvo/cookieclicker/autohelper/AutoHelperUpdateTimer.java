@@ -1,21 +1,24 @@
 package nl.han.jlvo.cookieclicker.autohelper;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import nl.han.ica.oopg.alarm.Alarm;
+import nl.han.ica.oopg.alarm.IAlarmListener;
 
-public class AutoHelperUpdateTimer {
+public class AutoHelperUpdateTimer implements IAlarmListener {
     private final IAutoHelperUpdateListener listener;
 
     public AutoHelperUpdateTimer(IAutoHelperUpdateListener listener) {
         this.listener = listener;
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new AutoHelperUpdateTask(), 0, 1000);
+        startAlarm();
     }
 
-    class AutoHelperUpdateTask extends TimerTask {
-        @Override
-        public void run() {
-            listener.onAutoHelperUpdate();
-        }
+    private void startAlarm() {
+        Alarm alarm = new Alarm(this.getClass().getName(), 1);
+        alarm.addTarget(this);
+    }
+
+    @Override
+    public void triggerAlarm(String s) {
+        listener.onAutoHelperUpdate();
+        startAlarm();
     }
 }
