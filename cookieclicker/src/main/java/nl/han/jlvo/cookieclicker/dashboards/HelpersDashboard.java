@@ -11,7 +11,7 @@ public class HelpersDashboard extends Dashboard {
     Inventory inventory;
 
     public HelpersDashboard(Inventory inventory) {
-        super(300, 0, 200, 175);
+        super(900, 0, 300, 200);
         this.inventory = inventory;
         helpersDashboardText = new TextObject("Autohelpers", 20);
         helpersDashboardText.setForeColor(255, 255, 255, 255);

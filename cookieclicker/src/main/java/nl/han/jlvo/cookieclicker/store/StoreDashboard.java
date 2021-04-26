@@ -15,16 +15,15 @@ public class StoreDashboard extends Dashboard implements IStoreItemClickListener
     private final ArrayList<StoreItem> items = new ArrayList<>();
 
     public StoreDashboard(Inventory inventory) {
-        super(300, 175, 200, 325);
+        super(900, 200, 300, 600);
         this.inventory = inventory;
         setBackground(0, 0, 255);
-        int yPos = 175;
+        int yPos = 300;
         for (AutoHelper h : inventory.getHelpers()) {
-            StoreItem item = new StoreItem(300, yPos, h, this);
+            StoreItem item = new StoreItem(1025, yPos, h, this);
             items.add(item);
             yPos += 75;
         }
-
     }
 
     @Override
