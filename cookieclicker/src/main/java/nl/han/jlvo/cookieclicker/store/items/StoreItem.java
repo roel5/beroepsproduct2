@@ -30,9 +30,16 @@ public class StoreItem extends GameObject {
 
     @Override
     public void draw(PGraphics pGraphics) {
+        pGraphics.fill(255);
         pGraphics.rect(x, y, 50, 50);
-        pGraphics.color(0);
-        pGraphics.text(String.valueOf(helper.getHelperPrice()), x, y);
+        writeText(pGraphics, "Shop", x - 15, 250, 0, 30);
+        writeText(pGraphics, String.valueOf(helper.getHelperPrice()), x , y, 0, 10);
+    }
+
+    private void writeText(PGraphics pGraphics, String text, int x, int y, int textColor, int textSize) {
+        pGraphics.fill(textColor);
+        pGraphics.textSize(textSize);
+        pGraphics.text(text, x, y);
     }
 
     @Override

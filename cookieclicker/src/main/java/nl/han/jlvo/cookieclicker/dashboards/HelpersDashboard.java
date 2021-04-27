@@ -15,7 +15,7 @@ public class HelpersDashboard extends Dashboard {
         this.inventory = inventory;
         helpersDashboardText = new TextObject("Autohelpers", 20);
         helpersDashboardText.setForeColor(255, 255, 255, 255);
-        setBackground(0, 255, 0);
+        setBackground(124, 185, 232);
         addGameObject(helpersDashboardText);
     }
 

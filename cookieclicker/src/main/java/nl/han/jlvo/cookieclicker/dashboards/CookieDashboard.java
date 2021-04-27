@@ -14,7 +14,7 @@ public class CookieDashboard extends Dashboard {
         this.inventory = inventory;
         cookieDashboardText = new TextObject("Cookiewallet: " + inventory.getWallet().getCookiesInWallet() + " Cookies per second: " + inventory.getTotalCookiesPerSecond(), 25);
         setCookieDashboardText();
-        setBackground(500, 0, 0);
+        setBackground(150, 75, 0);
         addGameObject(cookieDashboardText);
     }
 

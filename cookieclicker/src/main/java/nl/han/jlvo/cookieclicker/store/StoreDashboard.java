@@ -17,7 +17,7 @@ public class StoreDashboard extends Dashboard implements IStoreItemClickListener
     public StoreDashboard(Inventory inventory) {
         super(900, 200, 300, 600);
         this.inventory = inventory;
-        setBackground(0, 0, 255);
+        setBackground(240, 248, 255);
         int yPos = 300;
         for (AutoHelper h : inventory.getHelpers()) {
             StoreItem item = new StoreItem(1025, yPos, h, this);
