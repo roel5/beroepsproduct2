@@ -31,6 +31,7 @@ public class CookieDashboard extends Dashboard {
 
     @Override
     public void update() {
+        setCookieDashboardText();
         cookieDashboardText.setText("Cookiewallet: " + inventory.getWallet().getCookiesInWallet() + " Cookies per second: " + inventory.getTotalCookiesPerSecond());
     }
 }
