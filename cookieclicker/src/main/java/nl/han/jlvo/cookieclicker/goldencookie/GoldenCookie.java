@@ -27,7 +27,7 @@ public class GoldenCookie extends SpriteObject {
     }
 
     private void setPosition() {
-        setX(random.nextInt(screenWidth));
+        setX(random.nextInt(700));
         setY(-100);
         setDirectionSpeed(180, 1);
     }
