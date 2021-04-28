@@ -33,15 +33,11 @@ public class Inventory {
         return helpers[kind.ordinal()];
     }
 
-    public boolean buyHelper(AutoHelper helper) {
-        boolean isPurchaseSuccessful = false;
-
+    public void buyHelper(AutoHelper helper) {
         if (helper.getHelperPrice() <= wallet.getCookiesInWallet()) {
             wallet.decreaseCookiesInWallet(helper.getHelperPrice());
             helper.increaseHelper();
-            isPurchaseSuccessful = true;
         }
-        return isPurchaseSuccessful;
     }
 
     public Wallet getWallet() {
