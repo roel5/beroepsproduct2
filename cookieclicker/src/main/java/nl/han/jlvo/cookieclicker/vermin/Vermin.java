@@ -4,7 +4,7 @@ import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.objects.AnimatedSpriteObject;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
-import nl.han.jlvo.cookieclicker.gameobjects.BigCookie;
+import nl.han.jlvo.cookieclicker.bigcookie.BigCookie;
 
 import java.util.List;
 import java.util.Random;

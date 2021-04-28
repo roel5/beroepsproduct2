@@ -1,4 +1,4 @@
-package nl.han.jlvo.cookieclicker.gameobjects;
+package nl.han.jlvo.cookieclicker.bigcookie;
 
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;

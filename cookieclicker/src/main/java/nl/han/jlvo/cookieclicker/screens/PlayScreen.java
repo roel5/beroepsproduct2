@@ -11,11 +11,11 @@ import nl.han.jlvo.cookieclicker.goldencookie.IGoldenCookieListener;
 import nl.han.jlvo.cookieclicker.goldencookie.IGoldenCookieSpawnerListener;
 import nl.han.jlvo.cookieclicker.inventory.Wallet;
 import nl.han.jlvo.cookieclicker.store.StoreDashboard;
-import nl.han.jlvo.cookieclicker.gameobjects.BigCookie;
+import nl.han.jlvo.cookieclicker.bigcookie.BigCookie;
 import nl.han.jlvo.cookieclicker.vermin.IVerminListener;
 import nl.han.jlvo.cookieclicker.vermin.IVerminSpawnerListener;
 import nl.han.jlvo.cookieclicker.vermin.Vermin;
-import nl.han.jlvo.cookieclicker.gameobjects.IBigCookieClickListener;
+import nl.han.jlvo.cookieclicker.bigcookie.IBigCookieClickListener;
 import nl.han.jlvo.cookieclicker.inventory.Inventory;
 import nl.han.jlvo.cookieclicker.vermin.VerminSpawner;
 
@@ -27,9 +27,9 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
     private final CookieDashboard cookieDashboard;
     private final HelpersDashboard helpersDashboard;
     private final StoreDashboard storeDashboard;
-    private final AutoHelperUpdateTimer updateTimer;
-    private final VerminSpawner verminSpawner;
-    private final GoldenCookieSpawner goldenCookieSpawner;
+    private AutoHelperUpdateTimer updateTimer;
+    private VerminSpawner verminSpawner;
+    private GoldenCookieSpawner goldenCookieSpawner;
 
     public PlayScreen(CookieClickerApp app) {
         this.app = app;
@@ -42,9 +42,9 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
         verminSpawner = new VerminSpawner(this);
         goldenCookieSpawner = new GoldenCookieSpawner(this);
         app.addGameObject(bigCookie, 350, 300);
+        app.addGameObject(storeDashboard);
         app.addDashboard(cookieDashboard);
         app.addDashboard(helpersDashboard);
-        app.addGameObject(storeDashboard);
     }
 
     @Override
