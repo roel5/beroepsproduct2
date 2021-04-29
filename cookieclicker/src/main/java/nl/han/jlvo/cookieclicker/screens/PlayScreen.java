@@ -5,10 +5,7 @@ import nl.han.jlvo.cookieclicker.autohelper.AutoHelperUpdateTimer;
 import nl.han.jlvo.cookieclicker.autohelper.IAutoHelperUpdateListener;
 import nl.han.jlvo.cookieclicker.dashboards.CookieDashboard;
 import nl.han.jlvo.cookieclicker.dashboards.HelpersDashboard;
-import nl.han.jlvo.cookieclicker.goldencookie.GoldenCookie;
-import nl.han.jlvo.cookieclicker.goldencookie.GoldenCookieSpawner;
-import nl.han.jlvo.cookieclicker.goldencookie.IGoldenCookieListener;
-import nl.han.jlvo.cookieclicker.goldencookie.IGoldenCookieSpawnerListener;
+import nl.han.jlvo.cookieclicker.goldencookie.*;
 import nl.han.jlvo.cookieclicker.inventory.Wallet;
 import nl.han.jlvo.cookieclicker.store.StoreDashboard;
 import nl.han.jlvo.cookieclicker.bigcookie.BigCookie;
@@ -19,7 +16,7 @@ import nl.han.jlvo.cookieclicker.bigcookie.IBigCookieClickListener;
 import nl.han.jlvo.cookieclicker.inventory.Inventory;
 import nl.han.jlvo.cookieclicker.vermin.VerminSpawner;
 
-public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateListener, IVerminSpawnerListener, IVerminListener, IGoldenCookieSpawnerListener, IGoldenCookieListener {
+public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateListener, IVerminSpawnerListener, IVerminListener, IGoldenCookieSpawnerListener, IGoldenCookieListener, IPowerUpTimerListener {
 
     private final Inventory inventory;
     private final BigCookie bigCookie;
@@ -27,17 +24,19 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
     private AutoHelperUpdateTimer updateTimer;
     private VerminSpawner verminSpawner;
     private GoldenCookieSpawner goldenCookieSpawner;
+    private final PowerUpTimer powerUpTimer;
 
     public PlayScreen(CookieClickerApp app) {
         this.app = app;
         inventory = new Inventory();
         bigCookie = new BigCookie(this);
-        CookieDashboard cookieDashboard = new CookieDashboard(inventory);
-        HelpersDashboard helpersDashboard = new HelpersDashboard(inventory);
-        StoreDashboard storeDashboard = new StoreDashboard(inventory);
         updateTimer = new AutoHelperUpdateTimer(this);
         verminSpawner = new VerminSpawner(this);
         goldenCookieSpawner = new GoldenCookieSpawner(this);
+        powerUpTimer = new PowerUpTimer(this);
+        cookieDashboard = new CookieDashboard(inventory);
+        helpersDashboard = new HelpersDashboard(inventory);
+        storeDashboard = new StoreDashboard(inventory);
         app.addGameObject(bigCookie, 350, 300);
         app.addGameObject(storeDashboard);
         app.addDashboard(cookieDashboard);
@@ -100,11 +99,23 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
 
     @Override
     public void onMultiplyClickerPowerUp() {
+        powerUpTimer.startTimerForClick();
         inventory.setClickPowerUpActive(true);
     }
 
     @Override
     public void onMultiplyHelperPowerUp() {
+        powerUpTimer.startTimerForHelper();
         inventory.setHelperPowerUpActive(true);
+    }
+
+    @Override
+    public void onHelperPowerUpEnded() {
+        inventory.setHelperPowerUpActive(false);
+    }
+
+    @Override
+    public void onClickPowerUpEnded() {
+        inventory.setClickPowerUpActive(false);
     }
 }
