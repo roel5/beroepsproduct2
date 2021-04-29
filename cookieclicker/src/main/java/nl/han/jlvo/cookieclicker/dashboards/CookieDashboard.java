@@ -4,10 +4,12 @@ import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.jlvo.cookieclicker.inventory.Inventory;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 public class CookieDashboard extends Dashboard {
 
-    DecimalFormat decimalFormat = new DecimalFormat("#.#");
+    DecimalFormat decimalFormat = new DecimalFormat("#.#", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
     private final TextObject cookieDashboardText;
     Inventory inventory;
 
