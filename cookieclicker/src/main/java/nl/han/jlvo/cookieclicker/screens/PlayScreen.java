@@ -30,13 +30,13 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
         this.app = app;
         inventory = new Inventory();
         bigCookie = new BigCookie(this);
+        CookieDashboard cookieDashboard = new CookieDashboard(inventory);
+        HelpersDashboard helpersDashboard = new HelpersDashboard(inventory);
+        StoreDashboard storeDashboard = new StoreDashboard(inventory);
         updateTimer = new AutoHelperUpdateTimer(this);
         verminSpawner = new VerminSpawner(this);
         goldenCookieSpawner = new GoldenCookieSpawner(this);
         powerUpTimer = new PowerUpTimer(this);
-        cookieDashboard = new CookieDashboard(inventory);
-        helpersDashboard = new HelpersDashboard(inventory);
-        storeDashboard = new StoreDashboard(inventory);
         app.addGameObject(bigCookie, 350, 300);
         app.addGameObject(storeDashboard);
         app.addDashboard(cookieDashboard);
