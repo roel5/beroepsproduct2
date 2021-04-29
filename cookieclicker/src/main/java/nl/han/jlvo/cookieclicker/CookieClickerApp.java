@@ -2,13 +2,16 @@ package nl.han.jlvo.cookieclicker;
 
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.view.View;
+import nl.han.jlvo.cookieclicker.screens.EndScreen;
 import nl.han.jlvo.cookieclicker.screens.*;
+import nl.han.jlvo.cookieclicker.statistics.StatisticsManager;
 
 public class CookieClickerApp extends GameEngine implements IGameStateListener {
     public GameStateManager gameStateManager;
     private StartScreen startScreen;
     private PlayScreen playScreen;
     private EndScreen endScreen;
+    public StatisticsManager stats;
     private float totalCookiesNeeded;
 
     public static void main(String[] args) {
@@ -27,6 +30,7 @@ public class CookieClickerApp extends GameEngine implements IGameStateListener {
         size(worldWidth, worldHeight);
 
         gameStateManager = new GameStateManager(this);
+        stats = new StatisticsManager();
     }
 
     @Override
@@ -51,7 +55,7 @@ public class CookieClickerApp extends GameEngine implements IGameStateListener {
                 playScreen = new PlayScreen(this);
                 break;
             case END:
-                endScreen = new EndScreen();
+                endScreen = new EndScreen(this);
                 break;
         }
     }

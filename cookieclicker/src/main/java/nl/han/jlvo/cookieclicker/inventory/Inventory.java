@@ -24,6 +24,15 @@ public class Inventory {
         return totalCookiesPerSecond;
     }
 
+    public float getTotalCookiesPerClick() {
+        MouseClicker mouseClicker = (MouseClicker) helpers[0];
+        float amount = 1 + mouseClicker.getAmount();
+        if (isClickPowerUpActive) {
+            amount = amount * 2;
+        }
+        return amount;
+    }
+
     public AutoHelper[] getHelpers() {
         return helpers;
     }
@@ -44,12 +53,7 @@ public class Inventory {
     }
 
     public void increaseCookieWalletByClick() {
-        MouseClicker mouseClicker = (MouseClicker) helpers[0];
-        float amount = 1 + mouseClicker.getAmount();
-        if (isClickPowerUpActive) {
-            amount = amount * 2;
-        }
-        wallet.increaseCookiesInWallet(amount);
+        wallet.increaseCookiesInWallet(getTotalCookiesPerClick());
     }
 
     public void increaseCookieWalletByAutoHelpers() {
