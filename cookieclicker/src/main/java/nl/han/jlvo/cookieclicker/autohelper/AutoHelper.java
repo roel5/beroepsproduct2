@@ -1,7 +1,5 @@
 package nl.han.jlvo.cookieclicker.autohelper;
 
-import java.text.DecimalFormat;
-
 public abstract class AutoHelper {
     private static final double PRICE_MULTIPLIER = 1.15;
 
