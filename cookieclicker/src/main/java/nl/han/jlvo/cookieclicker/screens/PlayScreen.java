@@ -24,9 +24,6 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
     private final Inventory inventory;
     private final BigCookie bigCookie;
     private final CookieClickerApp app;
-    private final CookieDashboard cookieDashboard;
-    private final HelpersDashboard helpersDashboard;
-    private final StoreDashboard storeDashboard;
     private AutoHelperUpdateTimer updateTimer;
     private VerminSpawner verminSpawner;
     private GoldenCookieSpawner goldenCookieSpawner;
@@ -35,9 +32,9 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
         this.app = app;
         inventory = new Inventory();
         bigCookie = new BigCookie(this);
-        cookieDashboard = new CookieDashboard(inventory);
-        helpersDashboard = new HelpersDashboard(inventory);
-        storeDashboard = new StoreDashboard(inventory);
+        CookieDashboard cookieDashboard = new CookieDashboard(inventory);
+        HelpersDashboard helpersDashboard = new HelpersDashboard(inventory);
+        StoreDashboard storeDashboard = new StoreDashboard(inventory);
         updateTimer = new AutoHelperUpdateTimer(this);
         verminSpawner = new VerminSpawner(this);
         goldenCookieSpawner = new GoldenCookieSpawner(this);
@@ -45,6 +42,15 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
         app.addGameObject(storeDashboard);
         app.addDashboard(cookieDashboard);
         app.addDashboard(helpersDashboard);
+    }
+
+    public void destroy() {
+        updateTimer.stopAlarm();
+        updateTimer = null;
+        verminSpawner.stopAlarm();
+        verminSpawner = null;
+        goldenCookieSpawner.stopAlarm();
+        goldenCookieSpawner = null;
     }
 
     @Override
@@ -55,6 +61,9 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
     @Override
     public void onAutoHelperUpdate() {
         inventory.increaseCookieWalletByAutoHelpers();
+        if (app.getTotalCookiesNeeded() < inventory.getWallet().getCookiesInWallet()) {
+            app.gameStateManager.setCurrentState(GameStateManager.GameState.END);
+        }
     }
 
     @Override

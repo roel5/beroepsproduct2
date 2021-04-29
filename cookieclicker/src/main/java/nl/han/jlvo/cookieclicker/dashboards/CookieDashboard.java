@@ -3,25 +3,32 @@ package nl.han.jlvo.cookieclicker.dashboards;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.jlvo.cookieclicker.inventory.Inventory;
+import java.text.DecimalFormat;
 
 public class CookieDashboard extends Dashboard {
 
+    DecimalFormat decimalFormat = new DecimalFormat("#.#");
     private final TextObject cookieDashboardText;
     Inventory inventory;
 
     public CookieDashboard(Inventory inventory) {
         super(0, 0, 900, 50);
         this.inventory = inventory;
-        cookieDashboardText = new TextObject("Cookiewallet: " + inventory.getWallet().getCookiesInWallet() + " Cookies per second: " + inventory.getTotalCookiesPerSecond(), 25);
-        setCookieDashboardText();
+        cookieDashboardText = new TextObject("", 25);
+        drawCookieDashboardTest();
         setBackground(150, 75, 0);
         addGameObject(cookieDashboardText);
     }
 
-    private void setCookieDashboardText() {
+    private void drawCookieDashboardTest() {
         cookieDashboardText.setForeColor(255, 255, 255, 255);
         cookieDashboardText.setX(125);
         cookieDashboardText.setY(10);
+        setCookieDashboardText();
+    }
+
+    private void setCookieDashboardText() {
+        cookieDashboardText.setText("Cookiewallet: " + Float.parseFloat(decimalFormat.format(inventory.getWallet().getCookiesInWallet())) + " Cookies per second: " + Float.parseFloat(decimalFormat.format(inventory.getTotalCookiesPerSecond())));
     }
 
     @Override
@@ -32,6 +39,5 @@ public class CookieDashboard extends Dashboard {
     @Override
     public void update() {
         setCookieDashboardText();
-        cookieDashboardText.setText("Cookiewallet: " + inventory.getWallet().getCookiesInWallet() + " Cookies per second: " + inventory.getTotalCookiesPerSecond());
     }
 }

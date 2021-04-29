@@ -9,6 +9,7 @@ public class CookieClickerApp extends GameEngine implements IGameStateListener {
     private StartScreen startScreen;
     private PlayScreen playScreen;
     private EndScreen endScreen;
+    private float totalCookiesNeeded;
 
     public static void main(String[] args) {
         CookieClickerApp app = new CookieClickerApp();
@@ -36,8 +37,11 @@ public class CookieClickerApp extends GameEngine implements IGameStateListener {
     public void onGameStateChanged(GameStateManager.GameState gameState) {
         deleteAllDashboards();
         deleteAllGameOBjects();
+        if (playScreen != null) {
+            playScreen.destroy();
+            playScreen = null;
+        }
         startScreen = null;
-        playScreen = null;
         endScreen = null;
         switch (gameState) {
             case START:
@@ -50,5 +54,13 @@ public class CookieClickerApp extends GameEngine implements IGameStateListener {
                 endScreen = new EndScreen();
                 break;
         }
+    }
+
+    public float getTotalCookiesNeeded() {
+        return totalCookiesNeeded;
+    }
+
+    public void setTotalCookiesNeeded(float totalCookiesNeeded) {
+        this.totalCookiesNeeded = totalCookiesNeeded;
     }
 }
