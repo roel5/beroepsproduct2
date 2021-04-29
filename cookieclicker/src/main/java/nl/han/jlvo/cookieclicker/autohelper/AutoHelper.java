@@ -7,6 +7,7 @@ public abstract class AutoHelper {
     protected float baseCookiesPerSecond;
     protected int amount;
     protected boolean isUpgraded;
+    protected String name;
 
     public void increaseHelper() {
         amount++;
@@ -21,8 +22,20 @@ public abstract class AutoHelper {
         return multiplier * (baseCookiesPerSecond * amount);
     }
 
+    public float getBaseCookiesPerSecond(){
+        return baseCookiesPerSecond;
+    }
+
+    public float getUpgradePrice() {
+        return basePrice * 10;
+    }
+
     public int getAmount() {
         return amount;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public boolean isUpgraded() {

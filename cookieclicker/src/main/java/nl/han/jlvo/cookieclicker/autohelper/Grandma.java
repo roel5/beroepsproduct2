@@ -6,5 +6,6 @@ public class Grandma extends AutoHelper {
         baseCookiesPerSecond = 1;
         amount = 0;
         isUpgraded = false;
+        name = "Oma";
     }
 }

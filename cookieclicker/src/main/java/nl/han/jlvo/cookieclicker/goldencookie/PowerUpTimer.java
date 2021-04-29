@@ -47,16 +47,19 @@ public class PowerUpTimer implements IAlarmListener {
         return (int) ChronoUnit.SECONDS.between(LocalDateTime.now(), helperTimerStart.plusSeconds(TIMER_LENGTH));
     }
 
+    public void stopAlarm() {
+        removeClickTimerAlarm();
+        removeHelperTimerAlarm();
+    }
+
     private void removeHelperTimerAlarm() {
         helperTimerStart = null;
-        helperTimerAlarm.removeTarget(this);
         helperTimerAlarm.stop();
         helperTimerAlarm = null;
     }
 
     private void removeClickTimerAlarm() {
         clickTimerStart = null;
-        clickTimerAlarm.removeTarget(this);
         clickTimerAlarm.stop();
         clickTimerAlarm = null;
     }

@@ -6,5 +6,6 @@ public class CookieMine extends AutoHelper {
         baseCookiesPerSecond = 47;
         amount = 0;
         isUpgraded = false;
+        name = "Mijn";
     }
 }

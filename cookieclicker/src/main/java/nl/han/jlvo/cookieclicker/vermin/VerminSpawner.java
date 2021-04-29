@@ -18,7 +18,7 @@ public class VerminSpawner implements IAlarmListener {
     }
 
     private void startAlarm() {
-        int interval = random.nextInt(20);
+        int interval = random.nextInt(120);
         alarm = new Alarm(this.getClass().getName(), interval);
         alarm.addTarget(this);
         alarm.start();
@@ -26,7 +26,6 @@ public class VerminSpawner implements IAlarmListener {
 
     public void stopAlarm() {
         isCancelled = true;
-        alarm.removeTarget(this);
         alarm.stop();
         alarm = null;
     }

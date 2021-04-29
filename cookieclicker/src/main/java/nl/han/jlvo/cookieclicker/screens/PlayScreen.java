@@ -28,19 +28,19 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
     private AutoHelperUpdateTimer updateTimer;
     private VerminSpawner verminSpawner;
     private GoldenCookieSpawner goldenCookieSpawner;
-    private final PowerUpTimer powerUpTimer;
+    private PowerUpTimer powerUpTimer;
 
     public PlayScreen(CookieClickerApp app) {
         this.app = app;
         inventory = new Inventory();
         bigCookie = new BigCookie(this);
-        CookieDashboard cookieDashboard = new CookieDashboard(inventory);
-        HelpersDashboard helpersDashboard = new HelpersDashboard(inventory);
-        StoreDashboard storeDashboard = new StoreDashboard(inventory, this);
         updateTimer = new AutoHelperUpdateTimer(this);
         verminSpawner = new VerminSpawner(this);
         goldenCookieSpawner = new GoldenCookieSpawner(this);
         powerUpTimer = new PowerUpTimer(this);
+        CookieDashboard cookieDashboard = new CookieDashboard(inventory, powerUpTimer);
+        HelpersDashboard helpersDashboard = new HelpersDashboard(inventory);
+        StoreDashboard storeDashboard = new StoreDashboard(inventory, this);
         app.addGameObject(bigCookie, 350, 300);
         app.addDashboard(cookieDashboard);
         app.addDashboard(helpersDashboard);
@@ -55,6 +55,8 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
         verminSpawner = null;
         goldenCookieSpawner.stopAlarm();
         goldenCookieSpawner = null;
+        powerUpTimer.stopAlarm();
+        powerUpTimer = null;
     }
 
     @Override
@@ -122,6 +124,11 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
     public void onStoreItemClicked(AutoHelper autoHelper) {
         app.stats.increaseTotalAmountOfHelpers();
         inventory.buyHelper(autoHelper);
+    }
+
+    @Override
+    public void onUpgradeStoreItemClick(AutoHelper autoHelper) {
+        inventory.buyUpgradeForHelper(autoHelper);
     }
 
     @Override

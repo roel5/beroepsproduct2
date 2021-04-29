@@ -6,5 +6,6 @@ public class MouseClicker extends AutoHelper {
         baseCookiesPerSecond = 0.1f;
         amount = 0;
         isUpgraded = false;
+        name = "Cursor";
     }
 }
