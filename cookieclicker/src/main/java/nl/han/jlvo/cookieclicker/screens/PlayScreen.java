@@ -8,11 +8,11 @@ import nl.han.jlvo.cookieclicker.dashboards.HelpersDashboard;
 import nl.han.jlvo.cookieclicker.goldencookie.*;
 import nl.han.jlvo.cookieclicker.inventory.Wallet;
 import nl.han.jlvo.cookieclicker.store.StoreDashboard;
-import nl.han.jlvo.cookieclicker.gameobjects.BigCookie;
+import nl.han.jlvo.cookieclicker.bigcookie.BigCookie;
 import nl.han.jlvo.cookieclicker.vermin.IVerminListener;
 import nl.han.jlvo.cookieclicker.vermin.IVerminSpawnerListener;
 import nl.han.jlvo.cookieclicker.vermin.Vermin;
-import nl.han.jlvo.cookieclicker.gameobjects.IBigCookieClickListener;
+import nl.han.jlvo.cookieclicker.bigcookie.IBigCookieClickListener;
 import nl.han.jlvo.cookieclicker.inventory.Inventory;
 import nl.han.jlvo.cookieclicker.vermin.VerminSpawner;
 
@@ -21,29 +21,35 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
     private final Inventory inventory;
     private final BigCookie bigCookie;
     private final CookieClickerApp app;
-    private final CookieDashboard cookieDashboard;
-    private final HelpersDashboard helpersDashboard;
-    private final StoreDashboard storeDashboard;
-    private final AutoHelperUpdateTimer updateTimer;
-    private final VerminSpawner verminSpawner;
-    private final GoldenCookieSpawner goldenCookieSpawner;
+    private AutoHelperUpdateTimer updateTimer;
+    private VerminSpawner verminSpawner;
+    private GoldenCookieSpawner goldenCookieSpawner;
     private final PowerUpTimer powerUpTimer;
 
     public PlayScreen(CookieClickerApp app) {
         this.app = app;
         inventory = new Inventory();
         bigCookie = new BigCookie(this);
+        CookieDashboard cookieDashboard = new CookieDashboard(inventory);
+        HelpersDashboard helpersDashboard = new HelpersDashboard(inventory);
+        StoreDashboard storeDashboard = new StoreDashboard(inventory);
         updateTimer = new AutoHelperUpdateTimer(this);
         verminSpawner = new VerminSpawner(this);
         goldenCookieSpawner = new GoldenCookieSpawner(this);
         powerUpTimer = new PowerUpTimer(this);
-        cookieDashboard = new CookieDashboard(inventory);
-        helpersDashboard = new HelpersDashboard(inventory);
-        storeDashboard = new StoreDashboard(inventory);
         app.addGameObject(bigCookie, 350, 300);
+        app.addGameObject(storeDashboard);
         app.addDashboard(cookieDashboard);
         app.addDashboard(helpersDashboard);
-        app.addGameObject(storeDashboard);
+    }
+
+    public void destroy() {
+        updateTimer.stopAlarm();
+        updateTimer = null;
+        verminSpawner.stopAlarm();
+        verminSpawner = null;
+        goldenCookieSpawner.stopAlarm();
+        goldenCookieSpawner = null;
     }
 
     @Override
@@ -54,6 +60,9 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
     @Override
     public void onAutoHelperUpdate() {
         inventory.increaseCookieWalletByAutoHelpers();
+        if (app.getTotalCookiesNeeded() < inventory.getWallet().getCookiesInWallet()) {
+            app.gameStateManager.setCurrentState(GameStateManager.GameState.END);
+        }
     }
 
     @Override

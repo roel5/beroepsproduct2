@@ -10,7 +10,6 @@ public class Inventory {
 
     public Inventory() {
         wallet = new Wallet();
-        wallet.increaseCookiesInWallet(10000);
         helpers = new AutoHelper[]{new MouseClicker(), new Grandma(), new CookieFarm(), new CookieMine(), new CookieFactory()};
     }
 

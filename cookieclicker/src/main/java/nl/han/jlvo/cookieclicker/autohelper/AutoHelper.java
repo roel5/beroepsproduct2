@@ -1,7 +1,9 @@
 package nl.han.jlvo.cookieclicker.autohelper;
 
+import java.text.DecimalFormat;
+
 public abstract class AutoHelper {
-    private static final double PRICE_MULTIPLIER = 0.15;
+    private static final double PRICE_MULTIPLIER = 1.15;
 
     protected int basePrice;
     protected float baseCookiesPerSecond;
@@ -13,7 +15,7 @@ public abstract class AutoHelper {
     }
 
     public float getHelperPrice() {
-        return (float) (basePrice + (basePrice * (amount * PRICE_MULTIPLIER)));
+        return (float) (basePrice * Math.pow(PRICE_MULTIPLIER, amount));
     }
 
     public float calculateCookiesPerSecond() {
