@@ -11,7 +11,7 @@ public class GoldenCookie extends SpriteObject {
     private static final int TTL = 7;
 
     private final Random random;
-    private PowerUp powerUp;
+    private PowerUpKind powerUpKind;
     private final IGoldenCookieListener listener;
     private final LocalDateTime aliveSince;
     private final int screenWidth;
@@ -43,7 +43,7 @@ public class GoldenCookie extends SpriteObject {
     public void mouseClicked(int x, int y, int button) {
         super.mouseClicked(x, y, button);
         if (x >= this.x && x <= this.x + this.width && y >= this.y && y <= this.y + this.height) {
-            switch (powerUp) {
+            switch (powerUpKind) {
                 case EXTRA_5:
                     listener.onIncreaseCookieWallet(5);
                     break;
@@ -68,25 +68,21 @@ public class GoldenCookie extends SpriteObject {
         int pos = random.nextInt(5);
         switch (pos) {
             case 1:
-                powerUp = PowerUp.EXTRA_5;
+                powerUpKind = PowerUpKind.EXTRA_5;
                 break;
             case 2:
-                powerUp = PowerUp.EXTRA_10;
+                powerUpKind = PowerUpKind.EXTRA_10;
                 break;
             case 3:
-                powerUp = PowerUp.EXTRA_30;
+                powerUpKind = PowerUpKind.EXTRA_30;
                 break;
             case 4:
-                powerUp = PowerUp.MULTIPLY_HELPER;
+                powerUpKind = PowerUpKind.MULTIPLY_HELPER;
                 break;
             default:
-                powerUp = PowerUp.MULTIPLY_CLICK;
+                powerUpKind = PowerUpKind.MULTIPLY_CLICK;
                 break;
         }
-    }
-
-    private enum PowerUp {
-        EXTRA_5, EXTRA_10, EXTRA_30, MULTIPLY_HELPER, MULTIPLY_CLICK
     }
 }
 
