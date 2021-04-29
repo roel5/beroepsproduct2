@@ -1,0 +1,68 @@
+package nl.han.jlvo.cookieclicker.buttons;
+
+import nl.han.ica.oopg.dashboard.Dashboard;
+import nl.han.ica.oopg.objects.GameObject;
+import nl.han.ica.oopg.objects.TextObject;
+import nl.han.jlvo.cookieclicker.statistics.IPlayAgainClickListener;
+import processing.core.PGraphics;
+
+public class PlayAgainButton extends GameObject {
+    private final IPlayAgainClickListener clickListener;
+    private final int x;
+    private final int y;
+    private final int width;
+    private final int height;
+    private final TextObject buttonText;
+    private Boolean isMouseOnButton = false;
+
+    public PlayAgainButton(IPlayAgainClickListener clickListener, int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.width = 200;
+        this.height = 75;
+        this.clickListener = clickListener;
+        buttonText = new TextObject("Play Again", 20);
+        buttonText.setForeColor(255, 255, 255, 255);
+    }
+
+    private void writeText(PGraphics pGraphics) {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void draw(PGraphics pGraphics) {
+
+        if (isMouseOnButton) {
+            pGraphics.fill(255, 0, 0);
+        } else {
+            pGraphics.fill(0, 255, 0);
+        }
+        pGraphics.rect(x, y, width, height);
+        pGraphics.textAlign(CENTER);
+        pGraphics.fill(255);
+        pGraphics.text("Play Again", x + width / 2, y + height / 2);
+    }
+
+    @Override
+    public void mouseClicked(int x, int y, int button) {
+        super.mouseClicked(x, y, button);
+        if (isMouseOnButton(x, y)) {
+            clickListener.onPlayAgainButtonClicked();
+        }
+    }
+
+    @Override
+    public void mouseMoved(int x, int y) {
+        super.mouseMoved(x, y);
+        isMouseOnButton = isMouseOnButton(x, y);
+    }
+
+    private boolean isMouseOnButton(int mouseX, int mouseY) {
+        return mouseX >= this.x && mouseX <= this.x + width && mouseY >= this.y && mouseY <= this.y + height;
+    }
+}

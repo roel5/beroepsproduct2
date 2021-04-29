@@ -18,7 +18,7 @@ public class GoldenCookieSpawner implements IAlarmListener {
 
     private void startAlarm() {
         int interval = random.nextInt(200);
-        Alarm alarm = new Alarm(this.getClass().getName(), 1);
+        Alarm alarm = new Alarm(this.getClass().getName(), interval);
         alarm.addTarget(this);
         alarm.start();
     }

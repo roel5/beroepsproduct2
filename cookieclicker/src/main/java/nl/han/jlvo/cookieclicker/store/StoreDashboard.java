@@ -9,18 +9,18 @@ import processing.core.PGraphics;
 
 import java.util.ArrayList;
 
-public class StoreDashboard extends Dashboard implements IStoreItemClickListener {
+public class StoreDashboard extends Dashboard  {
 
-    private final Inventory inventory;
+    private final IStoreItemClickListener clickListener;
     private final ArrayList<StoreItem> items = new ArrayList<>();
 
-    public StoreDashboard(Inventory inventory) {
+    public StoreDashboard(Inventory inventory, IStoreItemClickListener clickListener) {
         super(900, 200, 300, 600);
-        this.inventory = inventory;
         setBackground(240, 248, 255);
+        this.clickListener = clickListener;
         int yPos = 300;
         for (AutoHelper h : inventory.getHelpers()) {
-            StoreItem item = new StoreItem(1025, yPos, h, this);
+            StoreItem item = new StoreItem(1025, yPos, h, clickListener);
             items.add(item);
             yPos += 75;
         }
@@ -48,10 +48,5 @@ public class StoreDashboard extends Dashboard implements IStoreItemClickListener
                 return;
             }
         }
-    }
-
-    @Override
-    public void onStoreItemClicked(AutoHelper autoHelper) {
-        inventory.buyHelper(autoHelper);
     }
 }

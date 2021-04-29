@@ -1,6 +1,7 @@
 package nl.han.jlvo.cookieclicker.screens;
 
 import nl.han.jlvo.cookieclicker.CookieClickerApp;
+import nl.han.jlvo.cookieclicker.autohelper.AutoHelper;
 import nl.han.jlvo.cookieclicker.autohelper.AutoHelperUpdateTimer;
 import nl.han.jlvo.cookieclicker.autohelper.IAutoHelperUpdateListener;
 import nl.han.jlvo.cookieclicker.dashboards.CookieDashboard;
@@ -12,6 +13,7 @@ import nl.han.jlvo.cookieclicker.goldencookie.IGoldenCookieSpawnerListener;
 import nl.han.jlvo.cookieclicker.inventory.Wallet;
 import nl.han.jlvo.cookieclicker.store.StoreDashboard;
 import nl.han.jlvo.cookieclicker.gameobjects.BigCookie;
+import nl.han.jlvo.cookieclicker.store.items.IStoreItemClickListener;
 import nl.han.jlvo.cookieclicker.vermin.IVerminListener;
 import nl.han.jlvo.cookieclicker.vermin.IVerminSpawnerListener;
 import nl.han.jlvo.cookieclicker.vermin.Vermin;
@@ -19,7 +21,9 @@ import nl.han.jlvo.cookieclicker.gameobjects.IBigCookieClickListener;
 import nl.han.jlvo.cookieclicker.inventory.Inventory;
 import nl.han.jlvo.cookieclicker.vermin.VerminSpawner;
 
-public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateListener, IVerminSpawnerListener, IVerminListener, IGoldenCookieSpawnerListener, IGoldenCookieListener {
+import java.time.LocalDateTime;
+
+public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateListener, IVerminSpawnerListener, IVerminListener, IGoldenCookieSpawnerListener, IGoldenCookieListener, IStoreItemClickListener {
 
     private final Inventory inventory;
     private final BigCookie bigCookie;
@@ -37,45 +41,50 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
         bigCookie = new BigCookie(this);
         cookieDashboard = new CookieDashboard(inventory);
         helpersDashboard = new HelpersDashboard(inventory);
-        storeDashboard = new StoreDashboard(inventory);
+        storeDashboard = new StoreDashboard(inventory, this);
         updateTimer = new AutoHelperUpdateTimer(this);
         verminSpawner = new VerminSpawner(this);
         goldenCookieSpawner = new GoldenCookieSpawner(this);
         app.addGameObject(bigCookie, 350, 300);
         app.addDashboard(cookieDashboard);
         app.addDashboard(helpersDashboard);
-        app.addGameObject(storeDashboard);
+        app.addGameObject(storeDashboard, 1);
+        app.stats.setGameStartTime(LocalDateTime.now());
     }
 
     @Override
     public void onBigCookieClicked() {
         inventory.increaseCookieWalletByClick();
+        app.stats.increaseTotalAmountOfClicks(inventory.getTotalCookiesPerClick());
     }
 
     @Override
     public void onAutoHelperUpdate() {
         inventory.increaseCookieWalletByAutoHelpers();
+        app.stats.increaseTotalAmountOfCookies(inventory.getTotalCookiesPerSecond());
     }
 
     @Override
     public void onVerminSpawnerTriggered() {
-        //TODO Add objects to list
         app.addGameObject(new Vermin(bigCookie, app.getWidth(), app.getHeight(), this));
     }
 
     @Override
     public void onCookiesEatUpdate(float amount) {
         inventory.getWallet().decreaseCookiesInWallet(amount);
+        app.stats.increaseTotalAmountOfCookiesEatenByVermin(amount);
     }
 
     @Override
     public void onVerminDied(Vermin vermin) {
+        app.stats.IncreaseTotalAmountOfVerminDied();
         app.deleteGameObject(vermin);
     }
 
     @Override
     public void onGoldenCookieSpawnerTriggered() {
         app.addGameObject(new GoldenCookie(this, app.getWidth()));
+        app.stats.increaseTotalAmountOfGoldenCookies();
     }
 
     @Override
@@ -97,5 +106,11 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
     @Override
     public void onMultiplyHelperPowerUp() {
         inventory.setHelperPowerUpActive(true);
+    }
+
+    @Override
+    public void onStoreItemClicked(AutoHelper autoHelper) {
+        app.stats.increaseTotalAmountOfHelpers();
+        inventory.buyHelper(autoHelper);
     }
 }
