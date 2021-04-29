@@ -6,5 +6,6 @@ public class CookieFarm extends AutoHelper{
         baseCookiesPerSecond = 8;
         amount = 0;
         isUpgraded = false;
+        name = "Boerderij";
     }
 }

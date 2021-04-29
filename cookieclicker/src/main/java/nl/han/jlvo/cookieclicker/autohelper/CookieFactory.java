@@ -6,5 +6,6 @@ public class CookieFactory extends AutoHelper {
         baseCookiesPerSecond = 260;
         amount = 0;
         isUpgraded = false;
+        name = "Fabriek";
     }
 }

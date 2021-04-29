@@ -6,6 +6,7 @@ import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.jlvo.cookieclicker.bigcookie.BigCookie;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 
@@ -18,6 +19,7 @@ public class Vermin extends AnimatedSpriteObject implements ICollidableWithGameO
     private final int screenHeight;
     private final IVerminListener verminListener;
     private final Random random;
+    private int lastEatSecond;
 
     public Vermin(GameObject target, int screenWidth, int screenHeight, IVerminListener verminListener) {
         super(new Sprite("cookieclicker/src/main/java/nl/han/jlvo/cookieclicker/resources/spritesheet.png"), 8);
@@ -94,8 +96,9 @@ public class Vermin extends AnimatedSpriteObject implements ICollidableWithGameO
     @Override
     public void update() {
         setDirection(getAngleFrom(target));
-        if (isEating) {
-            verminListener.onCookiesEatUpdate(random.nextInt(4));
+        if (isEating && lastEatSecond != LocalDateTime.now().getSecond()) {
+            lastEatSecond = LocalDateTime.now().getSecond();
+            verminListener.onCookiesEatUpdate(random.nextInt(50));
         }
     }
 

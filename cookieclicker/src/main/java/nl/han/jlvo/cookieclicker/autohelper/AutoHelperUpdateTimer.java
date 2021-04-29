@@ -21,7 +21,6 @@ public class AutoHelperUpdateTimer implements IAlarmListener {
 
     public void stopAlarm() {
         isCancelled = true;
-        alarm.removeTarget(this);
         alarm.stop();
         alarm = null;
     }

@@ -37,15 +37,25 @@ public class Inventory {
         return helpers;
     }
 
-    public AutoHelper getHelper(AutoHelperKind kind) {
-        return helpers[kind.ordinal()];
-    }
-
     public void buyHelper(AutoHelper helper) {
         if (helper.getHelperPrice() <= wallet.getCookiesInWallet()) {
             wallet.decreaseCookiesInWallet(helper.getHelperPrice());
             helper.increaseHelper();
         }
+    }
+
+    public void buyUpgradeForHelper(AutoHelper helper) {
+        if (helper.getUpgradePrice() <= wallet.getCookiesInWallet()) {
+            wallet.decreaseCookiesInWallet(helper.getUpgradePrice());
+            helper.setUpgraded(true);
+        }
+    }
+
+    public boolean getIsClickPowerUpActive() {
+        return isClickPowerUpActive;
+    }
+    public boolean isHelperPowerUpActive() {
+        return isHelperPowerUpActive;
     }
 
     public Wallet getWallet() {
