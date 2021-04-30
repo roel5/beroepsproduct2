@@ -48,8 +48,12 @@ public class PowerUpTimer implements IAlarmListener {
     }
 
     public void stopAlarm() {
-        removeClickTimerAlarm();
-        removeHelperTimerAlarm();
+        if (clickTimerAlarm != null) {
+            removeClickTimerAlarm();
+        }
+        if (helperTimerAlarm != null) {
+            removeHelperTimerAlarm();
+        }
     }
 
     private void removeHelperTimerAlarm() {
