@@ -38,13 +38,14 @@ public class PlayAgainButton extends GameObject {
     public void draw(PGraphics pGraphics) {
 
         if (isMouseOnButton) {
-            pGraphics.fill(255, 0, 0);
+            pGraphics.fill(100,150, 100);
         } else {
-            pGraphics.fill(0, 255, 0);
+            pGraphics.fill(200, 255, 200);
         }
         pGraphics.rect(x, y, width, height);
         pGraphics.textAlign(CENTER);
-        pGraphics.fill(255);
+        pGraphics.textSize(20);
+        pGraphics.fill(0);
         pGraphics.text("Play Again", x + width / 2, y + height / 2);
     }
 

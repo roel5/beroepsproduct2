@@ -19,6 +19,10 @@ public class StatisticsManager {
         totalAmountOfCookies += amount;
     }
 
+    public void resetTotalAmountOfCookies() {
+        totalAmountOfCookies = 0;
+    }
+
     public int getTotalAmountOfClicks() {
         return totalAmountOfClicks;
     }
@@ -28,12 +32,20 @@ public class StatisticsManager {
         increaseTotalAmountOfCookies(cookiesForClick);
     }
 
+    public void resetTotalAmountOfClicks() {
+        totalAmountOfClicks = 0;
+    }
+
     public int getTotalAmountOfGoldenCookies() {
         return totalAmountOfGoldenCookies;
     }
 
     public void increaseTotalAmountOfGoldenCookies() {
         totalAmountOfGoldenCookies++;
+    }
+
+    public void resetTotalAmountOfGoldenCookies() {
+        totalAmountOfGoldenCookies = 0;
     }
 
     public void setGameStartTime(LocalDateTime gameStartTime) {
@@ -52,12 +64,20 @@ public class StatisticsManager {
         totalAmountOfVerminDied++;
     }
 
-    public void increaseTotalAmountOfCookiesEatenByVermin(float cookies) {
-        totalAmountOfCookiesEatenByVermin = cookies;
+    public void resetTotalAmountOfVerminDied() {
+        totalAmountOfVerminDied = 0;
     }
 
     public float getTotalAmountOfCookiesEatenByVermin() {
         return totalAmountOfCookiesEatenByVermin;
+    }
+
+    public void increaseTotalAmountOfCookiesEatenByVermin(float cookies) {
+        totalAmountOfCookiesEatenByVermin = cookies;
+    }
+
+    public void resetTotalAmountOfCookiesEatenByVermin() {
+        totalAmountOfCookiesEatenByVermin = 0;
     }
 
     public int getTotalAmountOfHelpers() {
@@ -66,5 +86,9 @@ public class StatisticsManager {
 
     public void increaseTotalAmountOfHelpers() {
         totalAmountOfHelpers++;
+    }
+
+    public void resetTotalAmountOfHelpers() {
+        totalAmountOfHelpers = 0;
     }
 }

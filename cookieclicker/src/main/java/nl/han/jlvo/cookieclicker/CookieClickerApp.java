@@ -4,6 +4,7 @@ import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.view.View;
 import nl.han.jlvo.cookieclicker.screens.EndScreen;
 import nl.han.jlvo.cookieclicker.screens.*;
+import nl.han.jlvo.cookieclicker.statistics.IPlayAgainClickListener;
 import nl.han.jlvo.cookieclicker.statistics.StatisticsManager;
 
 public class CookieClickerApp extends GameEngine implements IGameStateListener {
@@ -66,5 +67,14 @@ public class CookieClickerApp extends GameEngine implements IGameStateListener {
 
     public void setTotalCookiesNeeded(float totalCookiesNeeded) {
         this.totalCookiesNeeded = totalCookiesNeeded;
+    }
+
+    public void resetStatistics() {
+        stats.resetTotalAmountOfClicks();
+        stats.resetTotalAmountOfCookies();
+        stats.resetTotalAmountOfHelpers();
+        stats.resetTotalAmountOfVerminDied();
+        stats.resetTotalAmountOfCookiesEatenByVermin();
+        stats.resetTotalAmountOfGoldenCookies();
     }
 }

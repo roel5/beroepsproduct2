@@ -5,12 +5,16 @@ import nl.han.jlvo.cookieclicker.buttons.PlayAgainButton;
 import nl.han.jlvo.cookieclicker.dashboards.StatisticsDashboard;
 import nl.han.jlvo.cookieclicker.statistics.IPlayAgainClickListener;
 
+import java.util.ArrayList;
+
 public class EndScreen implements IPlayAgainClickListener {
 
     private final StatisticsDashboard statisticsDashboard;
     private PlayAgainButton playAgainButton;
+    private CookieClickerApp app;
 
     public EndScreen(CookieClickerApp app) {
+        this.app = app;
         app.stats.getTotalAmountOfClicks();
         statisticsDashboard = new StatisticsDashboard(app.stats, this,0, 0, app.getWidth(), app.getHeight() - 200);
         app.addDashboard(statisticsDashboard);
@@ -20,6 +24,7 @@ public class EndScreen implements IPlayAgainClickListener {
 
     @Override
     public void onPlayAgainButtonClicked() {
-        System.out.println("Hello There");
+        app.resetStatistics();
+        app.gameStateManager.setCurrentState(GameStateManager.GameState.START);
     }
 }
