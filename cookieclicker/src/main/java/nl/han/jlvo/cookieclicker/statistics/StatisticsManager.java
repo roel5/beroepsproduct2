@@ -52,12 +52,12 @@ public class StatisticsManager {
         totalAmountOfVerminDied++;
     }
 
-    public void increaseTotalAmountOfCookiesEatenByVermin(float cookies) {
-        totalAmountOfCookiesEatenByVermin = cookies;
-    }
-
     public float getTotalAmountOfCookiesEatenByVermin() {
         return totalAmountOfCookiesEatenByVermin;
+    }
+
+    public void increaseTotalAmountOfCookiesEatenByVermin(float cookies) {
+        totalAmountOfCookiesEatenByVermin = cookies;
     }
 
     public int getTotalAmountOfHelpers() {

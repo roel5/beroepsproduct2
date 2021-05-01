@@ -69,7 +69,7 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
     public void onAutoHelperUpdate() {
         inventory.increaseCookieWalletByAutoHelpers();
         app.stats.increaseTotalAmountOfCookies(inventory.getTotalCookiesPerSecond());
-        if (app.getTotalCookiesNeeded() < inventory.getWallet().getCookiesInWallet()) {
+        if (app.getTotalCookiesNeeded() < inventory.getWallet().getCookiesInWallet() || inventory.getWallet().getCookiesInWallet() < 0) {
             app.gameStateManager.setCurrentState(GameStateManager.GameState.END);
         }
     }

@@ -67,4 +67,8 @@ public class CookieClickerApp extends GameEngine implements IGameStateListener {
     public void setTotalCookiesNeeded(float totalCookiesNeeded) {
         this.totalCookiesNeeded = totalCookiesNeeded;
     }
+
+    public void resetStatistics() {
+        stats = new StatisticsManager();
+    }
 }

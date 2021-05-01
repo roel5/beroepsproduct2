@@ -2,6 +2,7 @@ package nl.han.jlvo.cookieclicker.dashboards;
 
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
+import nl.han.jlvo.cookieclicker.autohelper.AutoHelper;
 import nl.han.jlvo.cookieclicker.inventory.Inventory;
 import processing.core.PGraphics;
 
@@ -22,14 +23,20 @@ public class HelpersDashboard extends Dashboard {
     @Override
     public void draw(PGraphics g) {
         super.draw(g);
-        int x = (int) (getX() + 10);
-        int y = 20;
-        for (int i = 0; i < inventory.getHelpers().length; i++) {
-            g.rect(x, y, 40, 40);
-            x += 50;
+        g.textAlign(CENTER);
+        g.fill(0);
+        g.text("Helper Overzicht", getX() + getWidth()/2, 20);
+        int x = (int) (getX() + 20);
+        int y = 50;
+        AutoHelper[] helpers = inventory.getHelpers();
+        for (AutoHelper helper : helpers) {
+            g.textSize(15);
+            g.text(helper.getName(), x, y, 70, 20);
+            g.text(helper.getAmount(), x + 35 , y + 40);
+            x += 90;
             if (x + 60 - getX() > getWidth()) {
-                y += 50;
-                x = (int) (getX() + 10);
+                y += 55;
+                x = (int) (getX() + 60);
             }
         }
     }
