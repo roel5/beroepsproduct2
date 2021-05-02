@@ -93,7 +93,7 @@ public class PlayScreen implements IBigCookieClickListener, IAutoHelperUpdateLis
 
     @Override
     public void onGoldenCookieSpawnerTriggered() {
-        app.addGameObject(new GoldenCookie(this, app.getWidth()));
+        app.addGameObject(new GoldenCookie(this));
         app.stats.increaseTotalAmountOfGoldenCookies();
     }
 

@@ -13,7 +13,6 @@ import java.util.Random;
 public class Vermin extends AnimatedSpriteObject implements ICollidableWithGameObjects {
     boolean isEating = false;
     final GameObject target;
-    private Direction direction;
     private int health;
     private final int screenWidth;
     private final int screenHeight;
@@ -32,6 +31,9 @@ public class Vermin extends AnimatedSpriteObject implements ICollidableWithGameO
         setDirection();
     }
 
+    /**
+     * Set a random start point from where the vermin moves to the big cookie
+     */
     private void setDirection() {
         int xPos;
         int yPos;
@@ -39,49 +41,41 @@ public class Vermin extends AnimatedSpriteObject implements ICollidableWithGameO
         int position = random.nextInt(8);
         switch (position) {
             case 1:
-                direction = Direction.TOP_RIGHT;
                 yPos = 0;
                 xPos = screenWidth;
                 spriteFrameIndex = 7;
                 break;
             case 2:
-                direction = Direction.RIGHT;
                 yPos = screenHeight / 2;
                 xPos = screenWidth;
                 spriteFrameIndex = 4;
                 break;
             case 3:
-                direction = Direction.BOTTOM_RIGHT;
                 yPos = screenHeight;
                 xPos = screenWidth;
                 spriteFrameIndex = 1;
                 break;
             case 4:
-                direction = Direction.BOTTOM;
                 xPos = screenWidth / 2;
                 yPos = screenHeight;
                 spriteFrameIndex = 2;
                 break;
             case 5:
-                direction = Direction.BOTTOM_LEFT;
                 yPos = screenHeight;
                 xPos = 0;
                 spriteFrameIndex = 3;
                 break;
             case 6:
-                direction = Direction.LEFT;
                 yPos = screenHeight / 2;
                 xPos = 0;
                 spriteFrameIndex = 5;
                 break;
             case 7:
-                direction = Direction.TOP_LEFT;
                 yPos = 0;
                 xPos = 0;
                 spriteFrameIndex = 0;
                 break;
             default:
-                direction = Direction.TOP;
                 yPos = 0;
                 xPos = screenWidth / 2;
                 spriteFrameIndex = 0;
@@ -121,9 +115,5 @@ public class Vermin extends AnimatedSpriteObject implements ICollidableWithGameO
                 setDirectionSpeed(0, 0);
             }
         }
-    }
-
-    private enum Direction {
-        TOP, TOP_RIGHT, RIGHT, BOTTOM_RIGHT, BOTTOM, BOTTOM_LEFT, LEFT, TOP_LEFT
     }
 }

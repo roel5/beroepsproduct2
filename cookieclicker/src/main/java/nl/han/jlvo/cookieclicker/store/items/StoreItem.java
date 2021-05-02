@@ -35,18 +35,18 @@ public class StoreItem extends GameObject {
     @Override
     public void draw(PGraphics pGraphics) {
         pGraphics.textAlign(LEFT);
-        writeText(pGraphics, helper.getName(), x, y, 0, 16);
-        writeText(pGraphics, Float.parseFloat(decimalFormat.format(helper.getHelperPrice())) + " Koekjes", x, y + 20, 0, 12);
-        writeText(pGraphics, helper.getBaseCookiesPerSecond() + " KPS", x, y + 36, 0, 12);
+        writeText(pGraphics, helper.getName(), x, y, 16);
+        writeText(pGraphics, Float.parseFloat(decimalFormat.format(helper.getHelperPrice())) + " Koekjes", x, y + 20, 12);
+        writeText(pGraphics, helper.getBaseCookiesPerSecond() + " KPS", x, y + 36, 12);
         if (!helper.isUpgraded()) {
             pGraphics.textAlign(RIGHT);
-            writeText(pGraphics, "Upgrade KPS x 2", x + 270, y + 20, 0, 12);
-            writeText(pGraphics, helper.getUpgradePrice() + " Koekjes", x + 270, y + 36, 0, 12);
+            writeText(pGraphics, "Upgrade KPS x 2", x + 270, y + 20, 12);
+            writeText(pGraphics, helper.getUpgradePrice() + " Koekjes", x + 270, y + 36, 12);
         }
     }
 
-    private void writeText(PGraphics pGraphics, String text, int x, int y, int textColor, int textSize) {
-        pGraphics.fill(textColor);
+    private void writeText(PGraphics pGraphics, String text, int x, int y, int textSize) {
+        pGraphics.fill(0);
         pGraphics.textSize(textSize);
         pGraphics.text(text, x, y);
     }

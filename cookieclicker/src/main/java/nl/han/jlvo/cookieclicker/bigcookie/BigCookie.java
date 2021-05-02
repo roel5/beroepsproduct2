@@ -5,11 +5,12 @@ import nl.han.ica.oopg.objects.SpriteObject;
 
 public class BigCookie extends SpriteObject {
     private static final int POWER = 2;
+    private static final String SPRITE_FILE_LOCATION = "cookieclicker/src/main/java/nl/han/jlvo/cookieclicker/resources/cookie.png";
 
     private final IBigCookieClickListener clickListener;
 
     public BigCookie(IBigCookieClickListener clickListener) {
-        super(new Sprite("cookieclicker/src/main/java/nl/han/jlvo/cookieclicker/resources/cookie.png"));
+        super(new Sprite(SPRITE_FILE_LOCATION));
 
         this.clickListener = clickListener;
     }
@@ -18,6 +19,9 @@ public class BigCookie extends SpriteObject {
     public void update() {
     }
 
+    /**
+     * Calculate if the mouse position is actually on the round cookie
+     */
     @Override
     public void mouseClicked(int x, int y, int button) {
         super.mouseClicked(x, y, button);

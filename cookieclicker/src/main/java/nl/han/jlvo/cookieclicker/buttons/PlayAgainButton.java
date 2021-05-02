@@ -1,6 +1,5 @@
 package nl.han.jlvo.cookieclicker.buttons;
 
-import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.jlvo.cookieclicker.statistics.IPlayAgainClickListener;
@@ -12,7 +11,6 @@ public class PlayAgainButton extends GameObject {
     private final int y;
     private final int width;
     private final int height;
-    private final TextObject buttonText;
     private Boolean isMouseOnButton = false;
 
     public PlayAgainButton(IPlayAgainClickListener clickListener, int x, int y) {
@@ -21,22 +19,16 @@ public class PlayAgainButton extends GameObject {
         this.width = 200;
         this.height = 75;
         this.clickListener = clickListener;
-        buttonText = new TextObject("Play Again", 20);
+        TextObject buttonText = new TextObject("Play Again", 20);
         buttonText.setForeColor(255, 255, 255, 255);
-    }
-
-    private void writeText(PGraphics pGraphics) {
-
     }
 
     @Override
     public void update() {
-
     }
 
     @Override
     public void draw(PGraphics pGraphics) {
-
         if (isMouseOnButton) {
             pGraphics.fill(100,150, 100);
         } else {
@@ -63,6 +55,11 @@ public class PlayAgainButton extends GameObject {
         isMouseOnButton = isMouseOnButton(x, y);
     }
 
+    /**
+     * @param mouseX x position of the mouse
+     * @param mouseY y position of the mouse
+     * @return if the mouse position is actually on the button
+     */
     private boolean isMouseOnButton(int mouseX, int mouseY) {
         return mouseX >= this.x && mouseX <= this.x + width && mouseY >= this.y && mouseY <= this.y + height;
     }

@@ -6,6 +6,7 @@ import nl.han.ica.oopg.alarm.IAlarmListener;
 import java.util.Random;
 
 public class VerminSpawner implements IAlarmListener {
+
     private Alarm alarm;
     private final IVerminSpawnerListener spawnerListener;
     private final Random random;

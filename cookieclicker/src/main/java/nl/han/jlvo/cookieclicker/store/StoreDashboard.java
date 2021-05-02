@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class StoreDashboard extends Dashboard  {
+    private static final int ITEM_X_POS = 925;
+    private static final int PADDING_Y = 75;
 
     DecimalFormat decimalFormat = new DecimalFormat("#.#", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
     private final IStoreItemClickListener clickListener;
@@ -39,10 +41,10 @@ public class StoreDashboard extends Dashboard  {
     private void drawStoreItems() {
         int yPos = 300;
         for (AutoHelper h : inventory.getHelpers()) {
-            StoreItem item = new StoreItem(925, yPos, h, clickListener, decimalFormat);
+            StoreItem item = new StoreItem(ITEM_X_POS, yPos, h, clickListener, decimalFormat);
             items.add(item);
             addGameObject(item);
-            yPos += 75;
+            yPos += PADDING_Y;
         }
     }
 
