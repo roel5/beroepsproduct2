@@ -9,10 +9,6 @@ public class GameStateManager {
         setCurrentState(GameState.START);
     }
 
-    public GameState getCurrentState() {
-        return currentGameState;
-    }
-
     public void setCurrentState(GameState currentGameState) {
         if (currentGameState == this.currentGameState) return;
         this.currentGameState = currentGameState;

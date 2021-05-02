@@ -10,12 +10,15 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 public class CookieDashboard extends Dashboard {
+    private static final int TEXT_X_POS = 125;
+    private static final int COOKIE_TEXT_Y_POS = 10;
+    private static final int POWERUP_TEXT_Y_POS = 400;
 
-    DecimalFormat decimalFormat = new DecimalFormat("#.#", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+    private final DecimalFormat decimalFormat = new DecimalFormat("#.#", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
     private final PowerUpTimer powerUpTimer;
     private final TextObject cookieDashboardText;
     private final TextObject powerUpText;
-    Inventory inventory;
+    private final Inventory inventory;
 
     public CookieDashboard(Inventory inventory, PowerUpTimer powerUpTimer) {
         super(0, 0, 900, 80);
@@ -31,11 +34,11 @@ public class CookieDashboard extends Dashboard {
 
     private void drawCookieDashboardTest() {
         cookieDashboardText.setForeColor(255, 255, 255, 255);
-        cookieDashboardText.setX(125);
-        cookieDashboardText.setY(10);
+        cookieDashboardText.setX(TEXT_X_POS);
+        cookieDashboardText.setY(COOKIE_TEXT_Y_POS);
         powerUpText.setForeColor(255, 255, 255, 255);
-        powerUpText.setX(125);
-        powerUpText.setY(40);
+        powerUpText.setX(TEXT_X_POS);
+        powerUpText.setY(POWERUP_TEXT_Y_POS);
         setCookieDashboardText();
     }
 

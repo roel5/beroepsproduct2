@@ -11,6 +11,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class StartScreen implements ICookieAmountButtonClickListener {
+    private static final int X_POS = 50;
+
     private final CookieClickerApp app;
 
     public StartScreen(CookieClickerApp app) {
@@ -23,12 +25,12 @@ public class StartScreen implements ICookieAmountButtonClickListener {
 
     void drawTitle() {
         TextObject title = new TextObject("Cookie Clicker", 100);
-        app.addGameObject(title, 50, 50);
+        app.addGameObject(title, X_POS, 50);
     }
 
     void drawExplanation() {
         TextObject explanation = new TextObject("Cookie Clicker is een spel waarbij je koekjes kunt bakken.\nElke klik levert een koekje op. Je kan ook koekjes investeren in helpers die de koekjesproductie automatiseren\nPas goed op voor het ongedierte wat aan je gebakken koekjes komt knagen", 18);
-        app.addGameObject(explanation, 50, 200);
+        app.addGameObject(explanation, X_POS, 200);
     }
 
     void drawCookie() {
@@ -58,10 +60,10 @@ public class StartScreen implements ICookieAmountButtonClickListener {
 
     void drawCookieAmountButtons() {
         TextObject explanation = new TextObject("Selecteer de hoeveelheid koekjes die je wilt behalen,\nklik daarna op het koekje om te beginnen", 18);
-        app.addGameObject(explanation, 50, 400);
-        CookieAmountButton cookieAmount100K = new CookieAmountButton(50, 500, 100000, this);
-        CookieAmountButton cookieAmount1M = new CookieAmountButton(50, 600, 1000000, this);
-        CookieAmountButton cookieAmount10M = new CookieAmountButton(50, 700, 10000000, this);
+        app.addGameObject(explanation, X_POS, 400);
+        CookieAmountButton cookieAmount100K = new CookieAmountButton(X_POS, 500, 100000, this);
+        CookieAmountButton cookieAmount1M = new CookieAmountButton(X_POS, 600, 1000000, this);
+        CookieAmountButton cookieAmount10M = new CookieAmountButton(X_POS, 700, 10000000, this);
 
         app.addGameObject(cookieAmount100K);
         app.addGameObject(cookieAmount1M);

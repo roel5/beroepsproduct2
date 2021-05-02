@@ -1,6 +1,5 @@
 package nl.han.jlvo.cookieclicker.goldencookie;
 
-
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 
@@ -9,26 +8,26 @@ import java.util.Random;
 
 public class GoldenCookie extends SpriteObject {
     private static final int TTL = 7;
+    private static final int POS_Y = -100;
+    private static final int POS_X_MAX = 700;
 
     private final Random random;
     private PowerUpKind powerUpKind;
     private final IGoldenCookieListener listener;
     private final LocalDateTime aliveSince;
-    private final int screenWidth;
 
-    public GoldenCookie(IGoldenCookieListener listener, int screenWidth) {
+    public GoldenCookie(IGoldenCookieListener listener) {
         super(new Sprite("cookieclicker/src/main/java/nl/han/jlvo/cookieclicker/resources/goldencookie.png"));
         this.listener = listener;
         aliveSince = LocalDateTime.now();
         this.random = new Random();
-        this.screenWidth = screenWidth;
         selectPowerUp();
         setPosition();
     }
 
     private void setPosition() {
-        setX(random.nextInt(700));
-        setY(-100);
+        setX(random.nextInt(POS_X_MAX));
+        setY(POS_Y);
         setDirectionSpeed(180, 1);
     }
 
@@ -64,6 +63,9 @@ public class GoldenCookie extends SpriteObject {
         }
     }
 
+    /**
+     * Give the object a random powerUpKind
+     */
     private void selectPowerUp() {
         int pos = random.nextInt(5);
         switch (pos) {

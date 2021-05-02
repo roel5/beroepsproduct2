@@ -9,14 +9,23 @@ public abstract class AutoHelper {
     protected boolean isUpgraded;
     protected String name;
 
+    /**
+     * Increase the amount of helpers by 1
+     */
     public void increaseHelper() {
         amount++;
     }
 
+    /**
+     * @return price for the helper multiplied by amount of helpers
+     */
     public float getHelperPrice() {
         return (float) (basePrice * Math.pow(PRICE_MULTIPLIER, amount));
     }
 
+    /**
+     * @return amount of cookies the AutoHelper generates per second
+     */
     public float calculateCookiesPerSecond() {
         int multiplier = isUpgraded ? 2 : 1;
         return multiplier * (baseCookiesPerSecond * amount);

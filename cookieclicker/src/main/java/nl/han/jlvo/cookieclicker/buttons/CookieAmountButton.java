@@ -4,6 +4,8 @@ import nl.han.ica.oopg.objects.GameObject;
 import processing.core.PGraphics;
 
 public class CookieAmountButton extends GameObject {
+    private static final int SIZE_BUTTON = 50;
+
     private boolean isSelected = false;
     private final int amount;
     private final int x;
@@ -25,14 +27,17 @@ public class CookieAmountButton extends GameObject {
 
     @Override
     public void draw(PGraphics pGraphics) {
+        int textXPos = x + 60;
+        int textYPos = (int) (y + getCenterY() - 12);
+
         if (isSelected) {
             pGraphics.fill(0);
         } else {
             pGraphics.fill(255);
         }
-        pGraphics.rect(x, y, 50, 50);
+        pGraphics.rect(x, y, SIZE_BUTTON, SIZE_BUTTON);
         pGraphics.fill(0);
-        pGraphics.text(amount + " koekjes", x + 60, y + getCenterY() - 12);
+        pGraphics.text(amount + " koekjes", textXPos, textYPos);
     }
 
     @Override

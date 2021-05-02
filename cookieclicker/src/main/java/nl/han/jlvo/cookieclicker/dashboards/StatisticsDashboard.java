@@ -2,21 +2,17 @@ package nl.han.jlvo.cookieclicker.dashboards;
 
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
-import nl.han.jlvo.cookieclicker.statistics.IPlayAgainClickListener;
 import nl.han.jlvo.cookieclicker.statistics.StatisticsManager;
-import processing.core.PGraphics;
-
 
 public class StatisticsDashboard extends Dashboard {
+    private static final int PADDING_Y = 40;
 
     private final TextObject[] statisticsDashboardText = new TextObject[6];
-    StatisticsManager stats;
-    private final IPlayAgainClickListener playAgainClickListener;
+    private final StatisticsManager stats;
 
-    public StatisticsDashboard(StatisticsManager stats, IPlayAgainClickListener playAgainClickListener, float x, float y, float width, float height) {
+    public StatisticsDashboard(StatisticsManager stats, float x, float y, float width, float height) {
         super(x, y, width, height);
         this.stats = stats;
-        this.playAgainClickListener = playAgainClickListener;
         assignDashboardText();
     }
 
@@ -31,13 +27,12 @@ public class StatisticsDashboard extends Dashboard {
             statisticsDashboardText[i].setX(posX);
             statisticsDashboardText[i].setY(posY);
             addGameObject(statisticsDashboardText[i]);
-            posY += 40;
+            posY += PADDING_Y;
         }
     }
 
     @Override
     public void update() {
-
     }
 
 }
